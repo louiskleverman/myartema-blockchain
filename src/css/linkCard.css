@@ -1,0 +1,22 @@
+.linkCard{
+    height:200px;
+    line-height: 200px;
+    border:2px solid rgba(50,50,50,0);
+    transition:0.3s;
+    margin:20px;
+}
+.linkCard p{
+    font-size:22px;
+    text-decoration: none;
+    text-align: center;
+    vertical-align: middle;
+    height:100%;
+    text-transform: uppercase;
+    font-weight:bold;
+    letter-spacing: 2px;
+    color:rgb(94, 147, 160);
+}
+.linkCard:hover,.linkCard.active{
+    border:2px solid rgba(39, 39, 39, 0.1);
+    box-shadow: 0 14px 28px rgba(0,0,0,.25), 0 10px 10px rgba(0,0,0,.22);
+}

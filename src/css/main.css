@@ -1,0 +1,39 @@
+h1{
+    text-align:center;
+    position:relative;
+    margin-bottom:60px;
+    margin-top:40px;
+    text-transform:uppercase;
+    font-size:30px;
+}
+h1:before{
+    content: "";
+    position: absolute;
+    width: 50%;
+    height: 1px;
+    bottom: -10px;
+    left: 25%;
+    border-bottom: 1px solid rgb(53, 53, 53);
+}
+
+h3{
+    text-align:center;
+    position:relative;
+    margin-bottom:40px;
+    text-transform:uppercase;
+    font-size:24px;
+}
+h3:before{
+    content: "";
+    position: absolute;
+    width: 5%;
+    bottom: -15px;
+    left: 47.5%;
+    border-bottom: 3px solid rgb(130, 167, 197);
+}
+body{
+    color:rgb(77, 77, 77);
+}
+a:hover{
+    text-decoration: none;
+}

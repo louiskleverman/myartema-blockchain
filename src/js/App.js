@@ -5,16 +5,24 @@ import TruffleContract from 'truffle-contract'
 import MyArtema from '../../build/contracts/MyArtema.json'
 import 'bootstrap/dist/css/bootstrap.css'
 import NavBar from "./components/navBar.jsx"
-import Banner from "./components/banner.jsx"
-import AddArtForm from "./components/AddArtForm.jsx"
-import Arts from "./components/Arts.jsx"
+import { BrowserRouter , Route, Switch} from "react-router-dom"
+import Home from "./pages/Home.jsx"
+import AddArt from "./pages/AddArt.jsx"
+import ExploreArt from "./pages/ExploreArt.jsx"
+import MyAccount from "./pages/MyAccount.jsx"
+import Account from "./pages/Account.jsx"
+import ArtPage from './pages/ArtPage.jsx'
+import Error from './pages/Error.jsx'
+import '../css/main.css'
 
 class App extends React.Component {
   state = {
     account: '0x0',
     myArtemaInstance: null,
     accountInterval: null,
+    updateArtsInterval:null,
     web3: null,
+    artistName: null,
     myArts: [
      
     ],
@@ -35,7 +43,6 @@ class App extends React.Component {
     this.myArtema = TruffleContract(MyArtema)
     this.myArtema.setProvider(this.web3Provider)
 
-    this.addArt = this.addArt.bind(this)
     this.getMyArt = this.getMyArt.bind(this)
     this.getRecentArt = this.getRecentArt.bind(this)
     this.state.account = this.state.web3.eth.accounts[0]
@@ -50,55 +57,58 @@ class App extends React.Component {
       this.getMyArt();
       this.getRecentArt();
 
+      this.state.myArtemaInstance.getArtistName.call(this.state.account).then((name) =>{
+        console.log("name",name);
+        this.setState({name})
+      });
+
       this.state.accountInterval = setInterval(() =>{
         if (this.state.web3.eth.accounts[0] !== this.state.account) {
           var account = this.state.web3.eth.accounts[0];
           this.setState({ account });
-          this.getMyArt();
-          this.getRecentArt();
+          this.state.myArtemaInstance.getArtistName.call(this.state.account).then((name) =>{
+            console.log("name",name);
+            this.setState({name})
+          });
         }
       }, 100);
+
+      this.updateArtsInterval = setInterval(() =>{
+        this.getMyArt();
+        this.getRecentArt();
+      }, 1000);
     });
   }
 
   render() {
+
     return (
-      <React.Fragment>
-        <NavBar/>
-        <Banner title="Home" account={this.state.account}/>
-        <main className="container">
-          <AddArtForm addArt={this.addArt}/>
-          <Arts state={this.state}  arts={this.state.myArts} title="My art"/>
-          <Arts state={this.state} arts={this.state.recentArts} title="Recent arts"/>
-        </main>
-      </React.Fragment>
+      <BrowserRouter>
+        <div>
+          <NavBar/>
+          <Switch>
+            <Route path="/" render={(props) => <Home {...props} state={this.state}/>} exact/>
+            <Route path="/addArt" render={(props) => <AddArt {...props} state={this.state}/>}/>
+            <Route path="/exploreArt" render={(props) => <ExploreArt {...props} state={this.state}/>}/>
+            <Route path="/myAccount" render={(props) => <MyAccount {...props} state={this.state}/>}/>
+            <Route path="/artist/:id" render={(props) => <Account {...props} state={this.state} newArt={this.newArt}/>}/>
+            <Route path="/art/:id" render={(props) => <ArtPage {...props} state={this.state} newArt={this.newArt}/>}/>
+            <Route component={Error} />
+          </Switch>  
+        </div>
+      </BrowserRouter>
     );
   }
   
-  addArt(){
-    var name = document.getElementById("productName").value;
-    var price = document.getElementById("productPrice").value;
-    if(price == '')
-      price = 0;
-    var rand = Math.floor(Math.random() * 3) + 1  ;
-    var image = "./images/art"+rand+".jpg";
-    
-    this.state.myArtemaInstance.addArt(name,image,this.state.web3.toWei(price),"",{from:this.state.account}).then(() => {
-      console.log("added product " + name + " " + price);
-      this.getMyArt();
-    }).catch(function(err){
-      console.log(err.message);
-    })
-    
-  } 
 
   getMyArt(){
-    console.log("getMyArt");
+    //console.log("getMyArt");
     this.state.myArtemaInstance.getArts.call(this.state.account).then((artsres) =>{
 
       let myArts = [];
       if(artsres.length == 0){
-        this.setState({ myArts });
+        if(JSON.stringify(myArts) != JSON.stringify(this.state.myArts))
+          this.setState({ myArts });
       }
       else{
         let last = artsres.length;
@@ -107,7 +117,8 @@ class App extends React.Component {
             myArts.push(this.newArt(art));
             --last;
             if(last == 0){
-              this.setState({ myArts });
+              if(JSON.stringify(myArts) != JSON.stringify(this.state.myArts))
+                this.setState({ myArts });
             }
           });
 
@@ -121,20 +132,24 @@ class App extends React.Component {
   }
 
   getRecentArt(){
-    console.log("getRecentArt");
+    //console.log("getRecentArt");
     this.state.myArtemaInstance.getArtsLength.call().then((length) =>{
       let recentArts = [];
+      
       if(length == 0){
-        this.setState({ recentArts });
+        if(JSON.stringify(recentArts) != JSON.stringify(this.state.recentArts))
+          this.setState({ recentArts });
       }
       else{
         let last = 6;
-        for(var i = length -1 ; i >= length - 7 && i >= 0; i--){
+        for(var i = length -1 ; i >= length - 6 && i >= 0; i--){
           this.state.myArtemaInstance.getArt.call(i).then((art) => {
             recentArts.push(this.newArt(art));
             last--;
             if(last ==0 || art[0] == 0){
-              this.setState({ recentArts });
+              if(JSON.stringify(recentArts) != JSON.stringify(this.state.recentArts)){
+                this.setState({ recentArts });
+              }
             }
           });
         }
@@ -146,10 +161,10 @@ class App extends React.Component {
 
   newArt = (_art) =>{
     let art = {
-      id : _art[0],
+      id : parseInt(_art[0]),
       name: _art[1],
       image: _art[2],
-      price: _art[3],
+      price: parseInt(_art[3]),
       description: _art[4],
       owner: _art[5],
       buyer : _art[6]

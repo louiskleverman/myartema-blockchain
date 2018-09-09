@@ -14,6 +14,8 @@ contract MyArtema{
     mapping(uint => address) public artToPublisher;
     mapping(address => uint) public publishCount;
     mapping(uint => address) public artToBuyer;
+    mapping(address => string) public artistName;
+    //mapping(string => address) public nameToAddress;
     
     mapping(address => mapping(uint => bool)) public reposts;
     mapping(address => mapping(uint => bool)) public likes;
@@ -48,6 +50,16 @@ contract MyArtema{
         return artsTab;
     }
 
+    // might be subject to reentrancy ?
+    function changeArtistName(string _name) public{
+        //require(nameToAddress[_name] == address(0),"Name already exists");
+        //nameToAddress[artistName[msg.sender]] = address(0);
+        artistName[msg.sender] = _name;
+        //nameToAddress[_name] = msg.sender;
+    }
+
+    // function checkname(string _name) public view
+
     function getArt(uint _id) public view returns(uint, string , string , uint , string , address , address ){
         Art memory a = arts[_id];
         address buyer = artToBuyer[_id];
@@ -75,5 +87,9 @@ contract MyArtema{
     
     function isReposted( uint _id) public view returns(bool){
         return reposts[msg.sender][_id];
+    }
+
+    function getArtistName(address _address) public view returns(string){
+        return artistName[_address];
     }
 }

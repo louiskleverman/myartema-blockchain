@@ -1,9 +1,9 @@
 .art{
-    margin:10px;
+    margin-bottom:10px;
 }
 
 .art .artImage{
-    height:200px;
+    height:230px;
     width:100%; 
     position:relative;
     background-position: center; /* Center the image */
@@ -21,12 +21,13 @@
     position: relative;
     
 }
-.art .artInfo .artPrice{
+.art .artPrice{
     position: absolute;
     top:2px;
     right:5px;
     font-size:12px;
-    color:rgb(60,60,60);
+    color:rgb(230, 230, 230);
+    font-size: 13px;
 }
 
 .art .artImage .buttons{
@@ -40,6 +41,7 @@
 .art .artImage .buttons a{
     opacity:0.7;
     transition:0.3s;
+    cursor: pointer;
 }
 
 .art .artImage .buttons a:hover{
@@ -65,4 +67,35 @@
 }
 .repost.on{
     color:rgb(134, 134, 250)!important;
+}
+
+.art .artist a{
+    color:white!important;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    display: block;
+    overflow: hidden
+}
+.art .artist{
+    position:absolute;
+    bottom:5px;
+    left:5px;
+    width:170px;
+}
+
+.art .buttonDiv{
+    position: absolute;
+    bottom:10%;
+    width:100%;
+    opacity:0;
+    transition:0.5s;
+}
+.art .buttonDiv button{
+    margin:auto;
+    display:block;
+}
+
+.artImage:hover .buttonDiv{
+    bottom:15%;
+    opacity:1;
 }

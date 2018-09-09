@@ -1,5 +1,6 @@
 import React from 'react';
 import "../../css/addArtForm.css"
+import { Redirect } from 'react-router-dom'
 
 class AddArtForm extends React.Component{
     
@@ -24,11 +25,32 @@ class AddArtForm extends React.Component{
                 <input type="number" id="productPrice" className="form-control" placeholder="Price" aria-label="Price" aria-describedby="basic-addon1"/>
             </div>
 
-            <button className="btn btn-secondary" onClick={this.props.addArt}>Add product</button>
+            <button className="btn btn-secondary" onClick={this.addArt}>Add product</button>
         </div>
         );
 
-    };
+    }
+
+    
+    addArt = () =>{
+        
+        var name = document.getElementById("productName").value;
+        var price = document.getElementById("productPrice").value;
+        if(price == '')
+            price = 0;
+        var rand = Math.floor(Math.random() * 3) + 1  ;
+        var image = "images/art"+rand+".jpg";
+        
+        this.props.state.myArtemaInstance.addArt(name,image,this.props.state.web3.toWei(price),"",{from:this.props.state.account}).then(() => {
+            console.log("added product " + name + " " + price);
+            
+            this.props.history.push('/myAccount');
+        //this.getMyArt();
+        }).catch(function(err){
+            console.log(err.message);
+        })
+        
+    } 
 
 }
 

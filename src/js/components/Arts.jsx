@@ -8,7 +8,9 @@ class Arts extends React.Component{
         return(
         <div className="arts row">
             <h3 className="col-md-12">{this.props.title}</h3>
-            {   
+            {   this.props.arts.length == 0 ?
+                <h4 className="text-center">No art to show here !</h4>
+                :
                 this.props.arts.map(art =>(
                     <Art key={art.id} art={art} state={this.props.state} title=""/>
                 ))
