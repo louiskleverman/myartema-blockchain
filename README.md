@@ -2,26 +2,60 @@
 # MyArtema - Blockchain version
 My Artema is an art social network based on blockchain technology. It will be able to reward it's artists that utilize the app and will think through how to make an artists life better.
 
+## Technologies used
+
+The technologies and langiuages used for this project are the following :
+*   React
+*   Javascript
+*   HTML5/CSS3
+*   Solidity
+*   IPFS
+*   Truffle
+*   Web3/truffle contract
+*   Ganache
+
 ## Getting Started
 
 ### Requirements for the project 
 
 To install this project you will need the following
 
+#### Node
+
 #### Truffle
+
+Truffle is a **smartcontract** to **webclient** framework that helps deploying apps using smart contracts very easily 
+
+```
+npm install -g truffle
+```
 
 #### Ganache
 
-#### Node
+Ganache is a private blockchain that is being used to deploy the app for testing
+there are 2 Ganache clients you can use :
+
+##### Ganache CLI
+
+The ganache command line
+
+```
+npm run install -g ganache-cli
+```
+##### Ganache UX client
+
+The ganache software that can be installed from ganaches main website
 
 #### IPFS
+
+Not required since Infura is doing all the hosting
 
 ### How to run the project
 
 In order to run the project you must first of all clone the project
 
 ```
-git clone ...
+git clone https://github.com/louiskleverman/myartema-blockchain.git
 ```
 
 Once cloned you have to install the packages with the following :
@@ -38,6 +72,18 @@ Once installed and ganache running you have to compile the contracts end migrate
 ```
 truffle compile
 truffle migrate
+```
+
+If you're using ganache-cli then use the following instead
+
+```
+truffle migrate --network ganache-cli
+```
+
+Then to run the app you simply need to run the following 
+
+```
+npm run start
 ```
 
 ## Ideas
