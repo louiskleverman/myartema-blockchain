@@ -14,6 +14,7 @@ contract MyArtema{
     mapping(uint => address) public artToPublisher;
     mapping(address => uint) public publishCount;
     mapping(uint => address) public artToBuyer;
+    mapping(address => uint) public buyCount;
     mapping(address => string) public artistName;
     //mapping(string => address) public nameToAddress;
     
@@ -26,14 +27,16 @@ contract MyArtema{
         arts[id].id = id;
         artToPublisher[id] = msg.sender;
         if(_price == 0)
-            artToBuyer[id] = msg.sender;
+            artToPublisher[id] = msg.sender;
         publishCount[msg.sender]++;
     }
     
     function buyArt(uint _id) public payable{
         require(artToBuyer[_id] == address(0),"This product has already been bought");
         require(msg.value == arts[_id].price,"Value sent must be equal to the price");
+        
         address owner = artToPublisher[_id];
+        buyCount[msg.sender]++;
         owner.transfer(msg.value);
         artToBuyer[_id] = msg.sender;
     }
@@ -43,6 +46,18 @@ contract MyArtema{
         uint counter;
         for(uint i = 0 ; i < arts.length ; i++){
             if(artToPublisher[i] == _publisher){
+                artsTab[counter++] = i;
+            }
+        }
+        
+        return artsTab;
+    }
+
+    function getBoughtArts(address _buyer) public view returns(uint[]){
+        uint[] memory artsTab = new uint[](buyCount[_buyer]);
+        uint counter;
+        for(uint i = 0 ; i < arts.length ; i++){
+            if(artToBuyer[i] == _buyer){
                 artsTab[counter++] = i;
             }
         }
@@ -65,6 +80,13 @@ contract MyArtema{
         address buyer = artToBuyer[_id];
         address publisher = artToPublisher[_id];
         return(a.id,a.name,a.image,a.price,a.description,publisher,buyer);
+    }
+
+    function getArtistInfo(address _artist) public view returns(string,uint,uint){
+        string storage name = artistName[_artist];
+        uint numberOfArt = getArts(_artist).length;
+        uint numberOfArtBought = getBoughtArts(_artist).length;
+        return(name,numberOfArt,numberOfArtBought);
     }
 
     function getArtsLength() public view returns(uint){

@@ -10,7 +10,7 @@ import Home from "./pages/Home.jsx"
 import AddArt from "./pages/AddArt.jsx"
 import ExploreArt from "./pages/ExploreArt.jsx"
 import MyAccount from "./pages/MyAccount.jsx"
-import Account from "./pages/Account.jsx"
+import Account from './pages/Account.jsx'
 import ArtPage from './pages/ArtPage.jsx'
 import Error from './pages/Error.jsx'
 import '../css/main.css'
@@ -90,7 +90,7 @@ class App extends React.Component {
             <Route path="/" render={(props) => <Home {...props} state={this.state}/>} exact/>
             <Route path="/addArt" render={(props) => <AddArt {...props} state={this.state}/>}/>
             <Route path="/exploreArt" render={(props) => <ExploreArt {...props} state={this.state}/>}/>
-            <Route path="/myAccount" render={(props) => <MyAccount {...props} state={this.state}/>}/>
+            <Route path="/myAccount" render={(props) => <MyAccount {...props} state={this.state} newArt={this.newArt}/>}/>
             <Route path="/artist/:id" render={(props) => <Account {...props} state={this.state} newArt={this.newArt}/>}/>
             <Route path="/art/:id" render={(props) => <ArtPage {...props} state={this.state} newArt={this.newArt}/>}/>
             <Route component={Error} />

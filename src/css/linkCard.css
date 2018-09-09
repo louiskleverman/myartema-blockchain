@@ -1,9 +1,18 @@
+
+
 .linkCard{
     height:200px;
     line-height: 200px;
-    border:2px solid rgba(50,50,50,0);
     transition:0.3s;
     margin:20px;
+    background-position: center; /* Center the image */
+    background-repeat: no-repeat; /* Do not repeat the image */
+    background-size: cover; /* Resize the background image to cover the entire container */
+    opacity:0.8;
+    box-sizing: border-box;
+    -moz-box-sizing: border-box;
+    -webkit-box-sizing: border-box;
+    border:2px solid rgba(255, 0, 0,0);
 }
 .linkCard p{
     font-size:22px;
@@ -14,9 +23,19 @@
     text-transform: uppercase;
     font-weight:bold;
     letter-spacing: 2px;
-    color:rgb(94, 147, 160);
+    color:rgb(116, 180, 196);
 }
 .linkCard:hover,.linkCard.active{
-    border:2px solid rgba(39, 39, 39, 0.1);
+    opacity:1;
+    box-sizing: border-box;
+    -moz-box-sizing: border-box;
+    -webkit-box-sizing: border-box;
+    border:2px solid rgb(116, 180, 196);
     box-shadow: 0 14px 28px rgba(0,0,0,.25), 0 10px 10px rgba(0,0,0,.22);
+}
+
+.brand{
+    font-family: Adam;
+    text-transform: uppercase;
+    font-size:25px;
 }

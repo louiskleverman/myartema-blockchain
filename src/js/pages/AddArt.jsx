@@ -8,7 +8,7 @@ class AddArt extends React.Component{
     render(){
         return(
         <React.Fragment>
-            <Banner title="Add Art" account={this.props.state.account}/>
+            <Banner title="Add Art" account={this.props.state.account} image="../images/addArt.png"/>
             <main className="container">
                 <AddArtForm {...this.props}/>
             </main>

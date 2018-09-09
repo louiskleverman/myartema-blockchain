@@ -1,20 +1,21 @@
 import React from 'react';
 import { NavLink } from 'react-router-dom'
+import '../../css/navBar.css'
 
 class navBar extends React.Component{
     
     render(){
         return(
-        <nav className="navbar navbar-dark bg-dark">
-            <NavLink to="/"><span className="navbar-brand">My Artema</span></NavLink>
+        <div className="navBar">
+            <NavLink to="/"><span className="brand">My Artema</span></NavLink>
             
-            <NavLink to="/myAccount"><span>My Account</span></NavLink>
-            <NavLink to="/exploreArt"><span>Explore Art</span></NavLink>
+            <NavLink to="/myAccount">My Account</NavLink>
+            <NavLink to="/exploreArt">Explore Art</NavLink>
 
-            <div className="form-inline">
-                <NavLink to="/addArt"><button className="btn btn-outline-info my-2 my-sm-0">Add art</button></NavLink>
-            </div>
-        </nav>
+            
+            <NavLink to="/addArt"><button className="addArt">Add art</button></NavLink>
+            
+        </div>
         );
     }
 

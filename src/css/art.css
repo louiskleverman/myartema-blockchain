@@ -12,14 +12,17 @@
 }
 
 .art .artInfo{
-    padding:15px 5px;
-    border-bottom-left-radius: 5px;
-    border-bottom-right-radius: 5px;
+    padding:10px 0px;
+    border:1px solid rgb(98, 181, 196);
     text-align: center;
-    background-color: rgb(240,240,240);
 
     position: relative;
     
+}
+.art .artInfo h4{
+    margin:0px;
+    color:rgb(98, 181, 196);
+    font-weight: bold;
 }
 .art .artPrice{
     position: absolute;

@@ -1,0 +1,24 @@
+.artistInfo{
+    margin:20px 0px;
+    position:relative;
+    padding:30px 0px;
+}
+
+.artistInfo:before{
+    content: "";
+    position: absolute;
+    width: 80%;
+    height: 1px;
+    bottom: 0px;
+    left: 10%;
+    border-bottom: 1px solid rgba(75, 75, 75,0.3);
+}
+.artistInfo:after{
+    content: "";
+    position: absolute;
+    width: 80%;
+    height: 1px;
+    top: 0px;
+    left: 10%;
+    border-bottom: 1px solid rgba(75, 75, 75,0.3);
+}

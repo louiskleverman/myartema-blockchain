@@ -1,0 +1,20 @@
+.artPage .artImage{
+    background-color:rgb(41, 41, 41);
+    width:100%;
+    padding:20px 0px;
+
+}
+.artPage .artImage img{
+    height:250px;
+    width:auto;
+    display:block;
+    margin:auto;
+    border:2px solid rgba(69, 202, 191, 0.185);
+}
+.artPage .artImage h3{
+    color:rgb(226, 226, 226);
+}
+
+.artPage .artInfo{
+    margin-top:20px;
+}

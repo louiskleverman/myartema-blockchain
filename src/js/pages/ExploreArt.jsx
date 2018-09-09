@@ -8,7 +8,7 @@ class ExploreArt extends React.Component{
     render(){
         return(
         <React.Fragment>
-            <Banner title="Explore Art" account={this.props.state.account}/>
+            <Banner title="Explore Art" account={this.props.state.account}  image="../images/explore.png"/>
             <main className="explore container">
                 <Arts state={this.props.state} arts={this.props.state.recentArts} title="Recent arts"/>
             </main>

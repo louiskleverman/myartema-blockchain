@@ -8,10 +8,10 @@ class PageLinks extends React.Component{
         return(
         <div className="pageLinks row">
             <div className="col-md-12 title"><h3>what you can find</h3></div>
-            <LinkCard link="" text="Home"/>
+            <LinkCard link="" text="Home" image="../images/home.png"/>
             <LinkCard link="/myAccount" text="My Account"/>
-            <LinkCard link="/exploreArt" text="Explore Art"/>
-            <LinkCard link="/addArt" text="Add Art"/>
+            <LinkCard link="/exploreArt" text="Explore Art" image="../images/explore.png"/>
+            <LinkCard link="/addArt" text="Add Art" image="../images/addArt.png"/>
         </div>
         );
     }

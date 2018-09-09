@@ -2,12 +2,14 @@ import React from 'react'
 import '../../css/art.css'
 //import fontAwesome from "font-awesome";
 import { NavLink } from 'react-router-dom'
+import ipfs from '../ipfs'
 
 class Art extends React.Component{
     state = {
         liked : false,
         reposted : false,
-        artistName : ''
+        artistName : '',
+        imageRender : null
     }
     
     buyArt = () => {
@@ -34,10 +36,17 @@ class Art extends React.Component{
                 artistName = this.props.art.owner;
             this.setState({artistName})
         });
-    }
+        ipfs.files.get(this.props.art.image, (error,files) =>{
+            if(error){
+                console.log(error)
+            } 
+            else
+                this.setState({ imageRender: files[0].content })     
+            })
+        }
 
     render(){
-        var imgUrl = this.props.art.image;
+        var imgUrl = this.state.imageRender;
         var price = this.props.art.price;
         var imageStyle = {
             backgroundImage: 'url(' + imgUrl + ')'
@@ -72,22 +81,19 @@ class Art extends React.Component{
         });
 
         let likeIcon = this.state.liked ? <i className="fas fa-heart"></i> : <i className="far fa-heart"></i>;
-        let repostIcon = this.state.reposted ? <i className="fas fa-retweet"></i> : <i className="fas fa-retweet"></i>;
-
-        console.log("RENDERED");
-
+        //let repostIcon = this.state.reposted ? <i className="fas fa-retweet"></i> : <i className="fas fa-retweet"></i>;
       
         let priceText =  price == 0 ?
         "Not for sale" : 
-        this.props.art.buyer == '0x0000000000000000000000000000000000000000' ?
-        <span>{this.props.state.web3.fromWei(price, 'ether') } <i class="fab fa-ethereum"></i></span>:
+        this.props.art.buyer == '0x0000000000000000000000000000000000000000' || this.props.art.buyer == this.props.art.owner?
+        <span>{this.props.state.web3.fromWei(price, 'ether') } <i className="fab fa-ethereum"></i></span>:
         "Already bought";
 
         let buyButton = this.props.art.owner == this.props.state.account ? 
         ""
         : this.props.art.buyer != '0x0000000000000000000000000000000000000000' ?
-        <button className="btn btn-primary" disabled>Buy</button> :
-        <button className="btn btn-primary" onClick={this.buyArt}>Buy</button> 
+        <button disabled>Buy</button> :
+        <button onClick={this.buyArt}>Buy</button> 
 
         return(
         <div className="col-md-4">

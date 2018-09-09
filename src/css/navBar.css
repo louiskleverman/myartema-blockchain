@@ -1,0 +1,22 @@
+.navBar{
+    background-color: rgb(27, 27, 27);
+    padding:20px 30px;
+    border-bottom: 1px solid rgba(86, 167, 170, 0.425);
+}
+.navBar a{
+    color:rgb(98, 181, 196)!important;
+    margin-left:10px;
+    padding:5px 10px;
+}
+.navBar button{
+    background: none;
+    
+    color:rgb(98, 181, 196);
+    border:1px solid rgb(98, 181, 196);
+    padding:10px 20px;
+    transition:0.3s;
+}
+.navBar button:hover{
+    background-color:rgba(98, 181, 196,.15);
+    text-align:right;
+}

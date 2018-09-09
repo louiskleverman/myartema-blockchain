@@ -6,11 +6,11 @@ class LinkCard extends React.Component{
     
     render(){
         let style = {
-
+            backgroundImage : "url(" + this.props.image + ")"
         }
         return(
         <NavLink className="col-md-6" to={this.props.link}>
-            <div className={"linkCard " + (this.props.link == "" ? "active" : '')}>
+            <div className={"linkCard " + (this.props.link == "" ? "active" : '')} style={style}>
                 <p>{this.props.text}</p>
             </div>
         </NavLink>

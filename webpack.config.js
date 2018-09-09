@@ -26,6 +26,18 @@ module.exports = {
         test: /\.json$/,
         loader: 'json-loader',
         include: '/build/contracts/'
+      },
+      {
+        test: /\.(pdf|jpg|png|gif|svg|ico)$/,
+        use: [
+            {
+                loader: 'url-loader'
+            },
+        ]
+      },
+      {
+        test: /\.(woff|woff2|eot|ttf|otf)$/,
+        loader: "file-loader"
       }
     ]
   }

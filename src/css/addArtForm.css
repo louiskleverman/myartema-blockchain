@@ -1,3 +1,16 @@
 .addProductForm{
     padding:20px;
 }
+
+.imagePreview{
+    width:100%;
+    margin-bottom:10px;
+
+}
+.imagePreview img{
+    border:2px solid rgba(60, 158, 137, 0.2);
+    height:200px;
+    width:auto;
+    margin:auto;
+    display:block;
+}

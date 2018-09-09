@@ -10,7 +10,7 @@ class Home extends React.Component{
     render(){
         return(
         <React.Fragment>
-            <Banner title="Home" account={this.props.state.account}/>
+            <Banner title="Home" account={this.props.state.account} image="../images/home.png"/>
             <main className="container home">
                 <h1>Welcome to MyArtema {this.props.state.name}</h1>
                 {
@@ -19,7 +19,6 @@ class Home extends React.Component{
                     : ""
                 }
                 <PageLinks/>
-                <NavLink to="/error">error</NavLink>
             </main>   
         </React.Fragment>
         );
