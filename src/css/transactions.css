@@ -1,0 +1,52 @@
+.transactions{
+    position:fixed;
+    bottom:0px;
+    right:10px;
+    opacity:0.3;
+    transition:0.3s;
+    z-index: 1000;
+}
+.transactions:hover{
+    opacity:1;
+}
+.transactionButton{
+    padding:5px 10px;
+    border:3px solid black;
+    text-align: center;
+}
+#transactionList{
+    width:300px;
+    height:0px;
+    
+    border-left:2px solid rgb(98, 181, 196);
+    border-right:2px solid rgb(98, 181, 196);
+    transition:0.4s;
+}
+
+.transaction{
+    margin:0px 5px;
+    margin-bottom:5px;
+    padding:1px;
+    background-color: rgba(0, 0, 0, 0.5);
+}
+.transaction p{
+    text-align: center;
+    margin-bottom:0px;
+}
+.transaction h5{
+    text-align: center;
+    display:block;
+}
+
+.transaction.pending{
+    border:2px solid rgb(197, 177, 140);
+    color : rgb(197, 177, 140);
+}
+.transaction.done{
+    border:2px solid rgb(118, 189, 118);
+    color :  rgb(118, 189, 118);
+}
+.transaction.failed{
+    border:2px solid rgb(238, 144, 144);
+    color:rgb(238, 144, 144);
+}

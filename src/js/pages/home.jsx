@@ -15,7 +15,7 @@ class Home extends React.Component{
                 <h1>Welcome to MyArtema {this.props.state.name}</h1>
                 {
                     this.props.state.name == '' ?
-                    <BecomeArtist state = {this.props.state} />
+                    <BecomeArtist changeName={this.props.changeName} state={this.props.state} />
                     : ""
                 }
                 <PageLinks/>

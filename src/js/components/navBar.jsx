@@ -9,11 +9,13 @@ class navBar extends React.Component{
         <div className="navBar">
             <NavLink to="/"><span className="brand">My Artema</span></NavLink>
             
-            <NavLink to="/myAccount">My Account</NavLink>
-            <NavLink to="/exploreArt">Explore Art</NavLink>
+            <NavLink to="/myAccount" className="link">My Account</NavLink>
+            <NavLink to="/exploreArt" className="link">Explore Art</NavLink>
 
             
             <NavLink to="/addArt"><button className="addArt">Add art</button></NavLink>
+
+            <a className="welcome">Welcome {this.props.name}</a>
             
         </div>
         );

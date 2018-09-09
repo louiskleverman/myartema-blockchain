@@ -14,6 +14,7 @@ import Account from './pages/Account.jsx'
 import ArtPage from './pages/ArtPage.jsx'
 import Error from './pages/Error.jsx'
 import '../css/main.css'
+import Transactions from './pages/Transactions.jsx'
 
 class App extends React.Component {
   state = {
@@ -23,10 +24,22 @@ class App extends React.Component {
     updateArtsInterval:null,
     web3: null,
     artistName: null,
-    myArts: [
-     
-    ],
-    recentArts: []
+    myArts: [],
+    recentArts: [],
+    transactions : [{
+        id : 0,
+        type : "like",
+        status : "pending"
+      },{
+        id : 1,
+        type : "upload",
+        status : "done"
+      },{
+        id : 2,
+        type : "donation",
+        status : "failed"
+      }
+    ]
   }
 
   constructor(props) {
@@ -85,9 +98,10 @@ class App extends React.Component {
     return (
       <BrowserRouter>
         <div>
-          <NavBar/>
+          <NavBar name={this.state.name}/>
+          <Transactions state={this.state}/>
           <Switch>
-            <Route path="/" render={(props) => <Home {...props} state={this.state}/>} exact/>
+            <Route path="/" render={(props) => <Home changeName={this.changeName} {...props} state={this.state}/>} exact/>
             <Route path="/addArt" render={(props) => <AddArt {...props} state={this.state}/>}/>
             <Route path="/exploreArt" render={(props) => <ExploreArt {...props} state={this.state}/>}/>
             <Route path="/myAccount" render={(props) => <MyAccount {...props} state={this.state} newArt={this.newArt}/>}/>
@@ -135,14 +149,15 @@ class App extends React.Component {
     //console.log("getRecentArt");
     this.state.myArtemaInstance.getArtsLength.call().then((length) =>{
       let recentArts = [];
-      
+      let numberToLoad = 12;
+
       if(length == 0){
         if(JSON.stringify(recentArts) != JSON.stringify(this.state.recentArts))
           this.setState({ recentArts });
       }
       else{
-        let last = 6;
-        for(var i = length -1 ; i >= length - 6 && i >= 0; i--){
+        let last = numberToLoad;
+        for(var i = length -1 ; i >= length - numberToLoad && i >= 0; i--){
           this.state.myArtemaInstance.getArt.call(i).then((art) => {
             recentArts.push(this.newArt(art));
             last--;
@@ -170,6 +185,13 @@ class App extends React.Component {
       buyer : _art[6]
     }
     return art  ;
+  }
+
+  changeName = () =>{
+    let name = document.getElementById("artistName").value;
+    this.state.myArtemaInstance.changeArtistName(name,{from:this.state.account}).then(()=>{
+        this.setState({name})
+    });
   }
 }
 

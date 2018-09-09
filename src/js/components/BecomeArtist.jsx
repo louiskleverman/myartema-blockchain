@@ -19,18 +19,11 @@ class BecomeArtist extends React.Component{
                 </div>
 
                 <div className="col-md-6">
-                    <button className="btn btn-secondary" onClick={this.changeName}>Change name</button>
+                    <button className="btn btn-secondary" onClick={this.props.changeName}>Change name</button>
                 </div>
             </div>
         </React.Fragment>
         );
-    }
-
-    changeName = () =>{
-        let name = document.getElementById("artistName").value;
-        this.props.state.myArtemaInstance.changeArtistName(name,{from:this.props.state.account}).then(()=>{
-            
-        });
     }
 
 }

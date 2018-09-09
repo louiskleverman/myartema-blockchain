@@ -13,6 +13,7 @@
     -moz-box-sizing: border-box;
     -webkit-box-sizing: border-box;
     border:2px solid rgba(255, 0, 0,0);
+    background-color: rgb(10,10,10);
 }
 .linkCard p{
     font-size:22px;

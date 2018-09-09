@@ -85,11 +85,11 @@ class Art extends React.Component{
       
         let priceText =  price == 0 ?
         "Not for sale" : 
-        this.props.art.buyer == '0x0000000000000000000000000000000000000000' || this.props.art.buyer == this.props.art.owner?
+        this.props.art.buyer == '0x0000000000000000000000000000000000000000'?
         <span>{this.props.state.web3.fromWei(price, 'ether') } <i className="fab fa-ethereum"></i></span>:
         "Already bought";
 
-        let buyButton = this.props.art.owner == this.props.state.account ? 
+        let buyButton = this.props.art.owner == this.props.state.account || price == 0? 
         ""
         : this.props.art.buyer != '0x0000000000000000000000000000000000000000' ?
         <button disabled>Buy</button> :
