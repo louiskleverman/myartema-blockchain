@@ -40,7 +40,7 @@ there are 2 Ganache clients you can use :
 The ganache command line
 
 ```
-npm run install -g ganache-cli
+npm install -g ganache-cli
 ```
 ##### Ganache UX client
 
@@ -62,7 +62,7 @@ Once cloned you have to install the packages with the following :
 
 ```
 npm install
-npm install -g webpack webpack-cli
+npm install -g webpack webpack-cli webpack-dev-server
 ```
 
 Next you have to launch ganache in order to deploy your contracts to a private ethereum network
